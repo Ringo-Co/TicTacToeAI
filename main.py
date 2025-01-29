@@ -5,10 +5,16 @@
 ###############################################################################
 # Imports and Global Variables ------------------------------------------------
 import random
-
+import tabulate
+board = [['1', '2', '3'], 
+         ['4', '5', '6'], 
+         ['7', '8', '9']]
 
 def main():
-    print("Hello world!")
+    print(tabulate(board,
+                   tablefmt="rounded_grid",
+                   stralign='center',
+                   rowalign='center'))
 
 
 # Main ------------------------------------------------------------------------
