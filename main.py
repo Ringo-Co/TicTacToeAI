@@ -72,7 +72,23 @@ def ai_turn():
 def main():
     while playing:
         player_turn()
+        if check_win(player_letter):
+            print("You win!")
+            choice = input("Continue? (y/n) ")
+            if 'y' in choice:
+                reset_board()
+                continue
+            else:
+                break
         ai_turn()
+        if check_win(ai_letter):
+            print("You lose!")
+            choice = input("Continue? (y/n) ")
+            if 'y' in choice:
+                reset_board()
+                continue
+            else:
+                break
 
 
 # Main ------------------------------------------------------------------------
