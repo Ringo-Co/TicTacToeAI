@@ -32,6 +32,7 @@ def check_win(letter):
     ''' Checks if "letter" has won.'''
     for row in board:  # Horizontal
         if all(cell == letter for cell in row):
+            print("Horizontal")
             return True
     for col in range(3):  # Vertical
         if all(board[row][col] == letter for row in range(3)):
@@ -58,6 +59,7 @@ def player_turn():
             row, col = divmod(choice - 1, 3)
             if board[row][col]not in [player_letter, ai_letter]:
                 board[row][col] = player_letter
+                break
             else:
                 print("Spot already taken!")
                 continue
@@ -66,14 +68,22 @@ def player_turn():
 
 
 def ai_turn():
-    pass
+    row_num = 0
+    for row in board:
+        space_num = 0
+        for space in row:
+            if space not in [player_letter, ai_letter]:
+                board[row_num][space_num] = ai_letter
+                return
+            space_num += 1
+        row_num += 1
 
 
 def main():
     while playing:
         player_turn()
         if check_win(player_letter):
-            print("You win!")
+            print("You won!")
             choice = input("Continue? (y/n) ")
             if 'y' in choice:
                 reset_board()
@@ -82,7 +92,7 @@ def main():
                 break
         ai_turn()
         if check_win(ai_letter):
-            print("You lose!")
+            print("You lost!")
             choice = input("Continue? (y/n) ")
             if 'y' in choice:
                 reset_board()
