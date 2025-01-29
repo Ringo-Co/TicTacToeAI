@@ -45,26 +45,25 @@ def check_win(letter):
         if all(board[i][2-i] == letter for i in range(3)):
             return True
         return False
-    
+
 
 def player_turn():
     while True:
         print_board()
-        print(f"You are playing as {player_letter}.")
         try:
             choice = int(input("Choose a space: ").strip())
+        except ValueError:
+            print("ERROR: Input was not a number.")
+        else:
             if choice < 1 or choice > 9:
                 print("ERROR: Invalid input.")
                 continue
             row, col = divmod(choice - 1, 3)
-            if board[row][col]not in [player_letter, ai_letter]:
+            if board[row][col] not in [player_letter, ai_letter]:
                 board[row][col] = player_letter
                 break
             else:
                 print("Spot already taken!")
-                continue
-        except ValueError:
-            print("ERROR: Input was not a number.")
 
 
 def ai_turn():
@@ -80,6 +79,7 @@ def ai_turn():
 
 
 def main():
+    print(f"You are playing as {player_letter}.")
     while playing:
         player_turn()
         if check_win(player_letter):
